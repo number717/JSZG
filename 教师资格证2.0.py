@@ -7,7 +7,6 @@
 
 
 import requests
-import re
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -47,14 +46,6 @@ class Email:
         if self.message:
             self.msg.attach(MIMEText(self.message))
 
-        # 添加附件，支持多个附件（传入list），或者单个附件（传入str）
-        if self.files:
-            if isinstance(self.files, list):
-                for f in self.files:
-                    self._attach_file(f)
-            elif isinstance(self.files, str):
-                self._attach_file(self.files)
-
         # 连接服务器并发送
         try:
             smtp_server = smtplib.SMTP(self.server)  # 连接sever
@@ -80,7 +71,6 @@ if __name__ == '__main__':
     wb_data.encoding = 'utf-8'
 
     soup = BeautifulSoup(wb_data.text, 'lxml')
-    # soup = BeautifulSoup(open('html.html', encoding='utf-8'), 'lxml')
     message = []
 
     for item in soup.find_all('a'):
@@ -95,13 +85,17 @@ if __name__ == '__main__':
         else:
             count = 0
 
-    print(message)
-    e = Email(title='百度搜索测试报告',
-              message='这是今天的测试报告，请查收！',
-              receiver='...',
-              server='...',
-              sender='...',
-              password='...',
-              path=''
-              )
-    e.send()
+    if message:
+        msg = '\n'.join(message)
+        print("Hi All,\n  以下是湖北考试院发布的最新关于教师资格证考试的通知:\n" + msg)
+        e = Email(title='教师资格证考试通知',
+                  message="Hi ALl,\n 以下是湖北考试院发布的最新关于教师资格证考试的通知\n" + msg,
+                  receiver='yinl10@chinaunicom.cn;41489377@qq.com',
+                  server='smtp.qq.com',
+                  sender='29268036@qq.com',
+                  password='714yy714717rr717',
+                  path=''
+                  )
+        e.send()
+    else:
+        print('没有考试通知。')
