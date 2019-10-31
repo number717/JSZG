@@ -64,7 +64,7 @@ class Email:
 
 if __name__ == '__main__':
 
-    key_words = ["2019年", "下半年", "中小学教师资格考试", '笔试', '报名']
+    key_words = ["2020年", "上半年", "中小学教师资格考试", '笔试', '报名']
     URL = "http://www.hbea.edu.cn/html/zhks/index.shtml"
 
     wb_data = requests.get(URL)
