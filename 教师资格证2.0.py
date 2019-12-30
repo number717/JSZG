@@ -89,7 +89,7 @@ if __name__ == '__main__':
         msg = '\n'.join(message)
         print("Hi All,\n  以下是湖北考试院发布的最新关于教师资格证考试的通知:\n" + msg)
         e = Email(title='教师资格证考试通知',
-                  message="Hi ALl,\n 以下是湖北考试院发布的最新关于教师资格证考试的通知\n" + msg,
+                  message="Hi All,\n 以下是湖北考试院发布的最新关于教师资格证考试的通知\n" + msg,
                   receiver='yinl10@chinaunicom.cn;41489377@qq.com',
                   server='smtp.qq.com',
                   sender='29268036@qq.com',
